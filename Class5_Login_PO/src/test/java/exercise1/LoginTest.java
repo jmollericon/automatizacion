@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.EmployeePage;
 import pages.LoginPage;
 
 import java.util.List;
@@ -19,10 +20,9 @@ public class LoginTest {
         System.out.println(webDriver.getTitle()); // Titulo de la página
         webDriver.manage().window().maximize();
 
+        // Login process
         LoginPage loginPage = new LoginPage(webDriver);
         loginPage.loginAs("username", "password");
-
-        // Login process
         /*WebElement inputUsername = webDriver.findElement(By.id("user"));
         inputUsername.sendKeys("username");
         WebElement inputPassword = webDriver.findElement(By.id("pass"));
@@ -31,20 +31,18 @@ public class LoginTest {
         loginButton.click();*/
 
         // Add employee
-        WebElement inputNameEmployee = webDriver.findElement(By.xpath("//*[@id='formEmployee']/div[2]/div[1]/input"));
+        EmployeePage employeePage = new EmployeePage(webDriver);
+        employeePage.addEmployee("Juan", "juan@email.com", "Calle: 3500 Nro. 34", "222222");
+        /*WebElement inputNameEmployee = webDriver.findElement(By.xpath("//*[@id='formEmployee']/div[2]/div[1]/input"));
         inputNameEmployee.sendKeys("Juan");
-
         WebElement inputEmailEmployee = webDriver.findElement(By.xpath("//*[@id='formEmployee']/div[2]/div[2]/input"));
         inputEmailEmployee.sendKeys("Juan@gmail.com");
-
         WebElement textAreaAddress = webDriver.findElement(By.id("address"));
         textAreaAddress.sendKeys("El Pinar, Cuidad de la Costa");
-
         WebElement inputPhone = webDriver.findElement(By.id("phone"));
         inputPhone.sendKeys("55589666");
-
         WebElement addButton = webDriver.findElement(By.id("addButton"));
-        addButton.click();
+        addButton.click(); */
 
         webDriver.quit(); // Cerrar navegador
     }
