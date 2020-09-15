@@ -6,6 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import pages.ConfirmationPage;
+import pages.PaymentPage;
+import pages.ResultSearchPage;
+import pages.SearchPage;
 
 public class BaseTest {
     private WebDriver webDriver;
@@ -13,78 +17,21 @@ public class BaseTest {
     public void setUp(){
         System.setProperty("webdriver.chrome.driver","resources/chromedriver");
         webDriver = new ChromeDriver();
-        webDriver.get("https://www.testfaceclub.com/aut-vuelos/");
+        webDriver.get("https://www.testfaceclub.com/aut-vuelos");
 
-        search();
-        selectTravel();
-        payTravel();
+        SearchPage searchPage = new SearchPage(webDriver);
+        ResultSearchPage resultSearchPage = searchPage.search(true,"Montevideo (MVD)","Buenos Aires (BUE)","06/25/2020",
+                "09/10/2020","Primera","2");
+
+        PaymentPage paymentPage = resultSearchPage.selectFirstTravel();
+
+        ConfirmationPage confirmationPage = paymentPage.payTravel("Maestro","456678952359","123","10","2024",
+                "Juan","Patricio","Cuba");
 
         webDriver.quit();
     }
 
-    private void search(){
-        WebElement radioButton = webDriver.findElement(By.name("optradio2"));
-        radioButton.click();
-
-        Select fromSelect = new Select(webDriver.findElement(By.id("from")));
-        fromSelect.selectByVisibleText("Montevideo (MVD)");
-
-        Select toSelect = new Select(webDriver.findElement(By.id("to")));
-        toSelect.selectByVisibleText("Buenos Aires (BUE)");
-
-        WebElement dateFromInput = webDriver.findElement(By.xpath("//*[@id='mainpanel']/div[2]/form/div[2]/div[3]//input"));
-        dateFromInput.sendKeys("06/25/2020");
-        dateFromInput.sendKeys(Keys.ENTER);
-
-        WebElement dateToInput = webDriver.findElement(By.xpath("//*[@id='mainpanel']/div[2]/form/div[2]/div[4]//input"));
-        dateToInput.sendKeys("09/10/2020");
-        dateToInput.sendKeys(Keys.ENTER);
-
-        Select classSelect = new Select(webDriver.findElement(By.id("classId")));
-        classSelect.selectByVisibleText("Primera");
-
-        Select passengerSelect = new Select(webDriver.findElement(By.id("passenger")));
-        passengerSelect.selectByVisibleText("2");
-
-        WebElement searchButton = webDriver.findElement(By.tagName("button"));
-        searchButton.click();
-    }
-
-    private void selectTravel(){
-        WebElement optionOne = webDriver.findElement(By.xpath("//*[@id='flights']/div[1]/a"));
-        optionOne.click();
-    }
-
-    private void payTravel() {
-        Select cardTypeSelect = new Select(webDriver.findElement(By.id("cards")));
-        cardTypeSelect.selectByVisibleText("Maestro");
-
-        WebElement cardNumberInput = webDriver.findElement(By.id("cardNumber"));
-        cardNumberInput.sendKeys("456678952359");
-
-        WebElement codeInput = webDriver.findElement(By.id("code"));
-        codeInput.sendKeys("123");
-
-        Select monthSelect = new Select(webDriver.findElement(By.id("month")));
-        monthSelect.selectByVisibleText("10");
-
-        Select yearSelect = new Select(webDriver.findElement(By.id("year")));
-        yearSelect.selectByVisibleText("2024");
-
-        WebElement nameInput = webDriver.findElement(By.xpath("//*[@id='paymentMethod']/div[2]/div[1]/input"));
-        nameInput.sendKeys("Juan");
-
-        WebElement lastNameInput = webDriver.findElement(By.xpath("//*[@id='paymentMethod']/div[2]/div[2]/input"));
-        lastNameInput.sendKeys("Patricio");
-
-        Select countrySelect = new Select(webDriver.findElement(By.id("country")));
-        countrySelect.selectByVisibleText("Cuba");
-
-        WebElement payButton = webDriver.findElement(By.xpath("//*[@id='paymentMethod']//button"));
-        payButton.click();
-    }
-
-    public static void main(String[] args) {
+    public static void main(String arg[]){
         BaseTest baseTest = new BaseTest();
         baseTest.setUp();
     }
