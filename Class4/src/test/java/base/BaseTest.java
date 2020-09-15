@@ -13,7 +13,8 @@ public class BaseTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
         webDriver = new ChromeDriver();
-        webDriver.get("https://the-internet.herokuapp.com/");
+        //webDriver.get("https://the-internet.herokuapp.com/");
+        webDriver.navigate().to("https://the-internet.herokuapp.com/");
         System.out.println(webDriver.getTitle()); // Titulo de la página
         webDriver.manage().window().maximize();
 
