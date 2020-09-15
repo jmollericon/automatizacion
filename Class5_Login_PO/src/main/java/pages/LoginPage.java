@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage {
     private WebDriver webDriver;
+
     private By userInput = By.id("user");
     private By passWordInput = By.id("pass");
     private By loginButton = By.id("loginButton");
@@ -26,15 +27,16 @@ public class LoginPage {
         webDriver.findElement(loginButton).click();
     }
 
-    /*public EmployeePage clickOnLoginButton(){
+   /* public EmployeePage clickOnLoginButton(){
         WebElement element = webDriver.findElement(loginButton);
         element.click();
         return new EmployeePage(webDriver);
-    }
+    }*/
 
     public EmployeePage loginAs(String user, String passWord){
         typeUserName(user);
         typePassWord(passWord);
-        return clickOnLoginButton();
-    }*/
+        clickOnLoginButton();
+        return new EmployeePage(webDriver);
+    }
 }

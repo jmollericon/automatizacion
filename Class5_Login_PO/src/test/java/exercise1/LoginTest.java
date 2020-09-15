@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.LoginPage;
 
 import java.util.List;
 
@@ -18,16 +19,16 @@ public class LoginTest {
         System.out.println(webDriver.getTitle()); // Titulo de la página
         webDriver.manage().window().maximize();
 
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.loginAs("username", "password");
+
         // Login process
-        // username
-        WebElement inputUsername = webDriver.findElement(By.id("user"));
+        /*WebElement inputUsername = webDriver.findElement(By.id("user"));
         inputUsername.sendKeys("username");
-        // password
         WebElement inputPassword = webDriver.findElement(By.id("pass"));
         inputPassword.sendKeys("password");
-        // loginButton
         WebElement loginButton = webDriver.findElement(By.id("loginButton"));
-        loginButton.click();
+        loginButton.click();*/
 
         // Add employee
         WebElement inputNameEmployee = webDriver.findElement(By.xpath("//*[@id='formEmployee']/div[2]/div[1]/input"));
