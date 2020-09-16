@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EmployeePage {
     private WebDriver webDriver;
@@ -27,5 +29,14 @@ public class EmployeePage {
     }
     public boolean isEmployeePageDisplayed() {
         return webDriver.findElement(formEmployee).isDisplayed();
+    }
+    public boolean isAlertPresent(){
+        try {
+            WebDriverWait wait = new WebDriverWait(webDriver, 3);
+            wait.until(ExpectedConditions.alertIsPresent());
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
