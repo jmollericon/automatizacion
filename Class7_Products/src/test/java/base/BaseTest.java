@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 public class BaseTest {
     protected WebDriver webDriver;
     private String url = "https://testfaceclub.com/aut-products/";
-    private String browser = "chrome";
+    private String browser = "firefox";
 
     @BeforeMethod
     public void setUp() throws Exception {
