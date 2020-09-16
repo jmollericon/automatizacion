@@ -25,7 +25,8 @@ public abstract class BaseTest {
 
         System.setProperty("webdriver.chrome.driver","resources/chromedriver");
         webDriver = new ChromeDriver();
-        webDriver.get("https://testfaceclub.com/ejercicios/");
+        webDriver.get("https://testfaceclub.com/login-employee-v2/");
+        //webDriver.get("https://testfaceclub.com/ejercicios/");
     }
 
     @AfterMethod

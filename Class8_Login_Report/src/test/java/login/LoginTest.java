@@ -11,7 +11,13 @@ public class LoginTest extends BaseTest {
     @Test
     public void testSuccessfulLogin(){
         LoginPage loginPage = new LoginPage(webDriver);
-        EmployeePage employeePage = loginPage.loginAs("user1","admin");
+        EmployeePage employeePage = loginPage.loginAs("admin","admin123");
         Assert.assertTrue(employeePage.isEmployeePageDisplayed());
+    }
+    @Test
+    public void testUnsuccessfulLogin(){
+        LoginPage loginPage = new LoginPage(webDriver);
+        EmployeePage employeePage = loginPage.loginAs("admin","123");
+        Assert.assertTrue(loginPage.isVisibleErrorMessage());
     }
 }
