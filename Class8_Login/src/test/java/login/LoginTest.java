@@ -13,5 +13,22 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(webDriver);
         EmployeePage employeePage = loginPage.loginAs("admin","admin123");
         Assert.assertTrue(employeePage.isEmployeePageDisplayed());
+        Assert.assertEquals(employeePage.getUserNameText(), "admin");
+    }
+
+    @Test
+    public void testInvalidCredentials(){
+        LoginPage loginPage = new LoginPage(webDriver);
+        loginPage.loginAs("admin","admin1253");
+        Assert.assertTrue(loginPage.isErrorMessageVisible());
+    }
+
+    @Test
+    public void testLogOut(){
+        LoginPage loginPage = new LoginPage(webDriver);
+        EmployeePage employeePage = loginPage.loginAs("admin","admin123");
+        loginPage = employeePage.clickOnLogOutButton();
+
+        Assert.assertTrue(loginPage.isLoginPageDisplayed());
     }
 }
