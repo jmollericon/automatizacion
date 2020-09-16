@@ -12,6 +12,8 @@ public class EmployeePage {
     private By phoneInput = By.id("phone");
     private By addButtonButton = By.id("addButton");
 
+    private By formEmployee = By.id("formEmployee"); // para verificar que se logeo
+
     public EmployeePage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
@@ -22,5 +24,8 @@ public class EmployeePage {
         webDriver.findElement(addressInput).sendKeys(address);
         webDriver.findElement(phoneInput).sendKeys(phone);
         webDriver.findElement(addButtonButton).click();
+    }
+    public boolean isEmployeePageDisplayed() {
+        return webDriver.findElement(formEmployee).isDisplayed();
     }
 }

@@ -23,20 +23,18 @@ public class LoginPage {
         webDriver.findElement(passWordInput).sendKeys(password);
     }
 
-    public void clickOnLoginButton(){
-        webDriver.findElement(loginButton).click();
-    }
+    //public void clickOnLoginButton(){
+    //    webDriver.findElement(loginButton).click();
+    //}
 
-   /* public EmployeePage clickOnLoginButton(){
-        WebElement element = webDriver.findElement(loginButton);
-        element.click();
+    public EmployeePage clickOnLoginButton(){
+        webDriver.findElement(loginButton).click();
         return new EmployeePage(webDriver);
-    }*/
+    }
 
     public EmployeePage loginAs(String user, String passWord){
         typeUserName(user);
         typePassWord(passWord);
-        clickOnLoginButton();
-        return new EmployeePage(webDriver);
+        return clickOnLoginButton();
     }
 }
