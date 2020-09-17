@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import tasks.IsEmployeePageDisplayed;
 import tasks.Login;
 
-public class LoginTests extends BaseTest {
+public class LoginTest extends BaseTest {
 
     @Test
     public void testSuccessfulLogin(){
